@@ -4,7 +4,7 @@ const SPEED = 600.0
 const DAMP = 1.0
 const HAND_DISTANCE = 50
 #const BULLET_DELAY = 0.01
-const BULLET_DELAY = 1
+const BULLET_DELAY = 0.1
 
 const BULLET = preload("res://bullet.tscn")
 

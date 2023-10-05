@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://c6jccva86ullw"]
+
+[ext_resource type="Script" path="res://particles/bullet_collision.gd" id="1_3shdk"]
+
+[sub_resource type="Gradient" id="Gradient_wui7p"]
+offsets = PackedFloat32Array(0, 0.895522, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.843284, 0.843284, 0.843284, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vdqoi"]
+gradient = SubResource("Gradient_wui7p")
+
+[sub_resource type="Curve" id="Curve_5uvm6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.879121), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xkmmp"]
+width = 32
+curve = SubResource("Curve_5uvm6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_doaj1"]
+emission_shape = 2
+emission_sphere_radius = 1.0
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 30.0
+initial_velocity_max = 50.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_min = 20.0
+damping_max = 30.0
+scale_min = 3.0
+scale_max = 6.0
+scale_curve = SubResource("CurveTexture_xkmmp")
+color = Color(0.67451, 0.960784, 0.945098, 1)
+color_ramp = SubResource("GradientTexture1D_vdqoi")
+
+[node name="WallBreak" type="GPUParticles2D"]
+emitting = false
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_doaj1")
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+script = ExtResource("1_3shdk")

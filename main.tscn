@@ -13,21 +13,33 @@ glow_bloom = 0.4
 [node name="Main" type="Node2D"]
 script = ExtResource("1_itbag")
 
-[node name="Player" parent="." instance=ExtResource("1_hcagr")]
-position = Vector2(537, 290)
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_7hyuh")
 
+[node name="Player" parent="." instance=ExtResource("1_hcagr")]
+position = Vector2(1011, 562)
+
 [node name="Wall" parent="." instance=ExtResource("2_8u8dx")]
-position = Vector2(809, 105)
+position = Vector2(889, 502)
 
 [node name="Wall2" parent="." instance=ExtResource("2_8u8dx")]
-position = Vector2(920, 109)
+position = Vector2(1144, 499)
+
+[node name="Wall5" parent="." instance=ExtResource("2_8u8dx")]
+position = Vector2(884, 493)
+rotation = -1.57079
+
+[node name="Wall7" parent="." instance=ExtResource("2_8u8dx")]
+position = Vector2(884, 642)
+rotation = -1.57079
+
+[node name="Wall8" parent="." instance=ExtResource("2_8u8dx")]
+position = Vector2(1021, 642)
+rotation = -1.57079
+
+[node name="Wall6" parent="." instance=ExtResource("2_8u8dx")]
+position = Vector2(1019, 493)
+rotation = -1.57079
 
 [node name="Wall3" parent="." instance=ExtResource("2_8u8dx")]
-position = Vector2(246, 358)
-
-[node name="Wall4" parent="." instance=ExtResource("2_8u8dx")]
-position = Vector2(632, 486)
-rotation = 1.57493
+position = Vector2(720, 630)

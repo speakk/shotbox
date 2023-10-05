@@ -2,6 +2,8 @@ extends RigidBody2D
 
 #@onready var collision_shape = get_node("CollisionShape2D").shape as RectangleShape2D
 
+var PARTICLES = preload("res://particles/wall_break.tscn")
+
 func _integrate_forces(state: PhysicsDirectBodyState2D):
 	for i in state.get_contact_count():
 		var object = state.get_contact_collider_object(i)
@@ -12,8 +14,17 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 			print("Collision point: ", collision_point)
 			
 			var y_diff = $ColorRect.size.y - collision_point.y
+			
+			if $ColorRect.size.y < 10:
+				queue_free()
+			
 			if y_diff < 3 or collision_point.y < 3:
 				continue
+				
+			var particles = PARTICLES.instantiate()
+			particles.global_position = global_collision_point
+			get_parent().add_child(particles)
+			particles.emitting = true
 				
 			set_y_size(collision_point.y)
 			var duplicated_wall = duplicate_unique()
@@ -31,3 +42,7 @@ func set_y_size(y_size):
 	$ColorRect.size.y = y_size
 	$CollisionPolygon2D.polygon[2].y = y_size
 	$CollisionPolygon2D.polygon[3].y = y_size
+	center_of_mass.y = y_size / 2
+	
+	if y_size < 3:
+		queue_free()
