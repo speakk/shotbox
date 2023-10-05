@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddgfyyjl0s8rq"]
+
+[ext_resource type="PackedScene" uid="uid://7f2hbyc3l8nu" path="res://player.tscn" id="1_hcagr"]
+[ext_resource type="Script" path="res://main.gd" id="1_itbag"]
+[ext_resource type="PackedScene" uid="uid://bb5ab7pw3kvl5" path="res://wall.tscn" id="2_8u8dx"]
+
+[sub_resource type="Environment" id="Environment_7hyuh"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 1.0
+glow_bloom = 0.4
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_itbag")
+
+[node name="Player" parent="." instance=ExtResource("1_hcagr")]
+position = Vector2(537, 290)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7hyuh")
+
+[node name="Wall" parent="." instance=ExtResource("2_8u8dx")]
+position = Vector2(809, 105)
+
+[node name="Wall2" parent="." instance=ExtResource("2_8u8dx")]
+position = Vector2(920, 109)
+
+[node name="Wall3" parent="." instance=ExtResource("2_8u8dx")]
+position = Vector2(246, 358)
+
+[node name="Wall4" parent="." instance=ExtResource("2_8u8dx")]
+position = Vector2(632, 486)
+rotation = 1.57493

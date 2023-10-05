@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://7f2hbyc3l8nu"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_dphtp"]
+[ext_resource type="PackedScene" uid="uid://djlr4c64qtm5x" path="res://circle.tscn" id="2_ij81c"]
+[ext_resource type="Script" path="res://circle.gd" id="3_wj120"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dm4kp"]
+radius = 20.0
+
+[node name="Player" type="RigidBody2D"]
+collision_layer = 4
+gravity_scale = 0.0
+linear_damp = 10.0
+script = ExtResource("1_dphtp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_dm4kp")
+
+[node name="Circle" parent="." instance=ExtResource("2_ij81c")]
+size = 20.0
+color = Color(0.345098, 0.462745, 0.6, 1)
+
+[node name="Hand" type="Node2D" parent="."]
+script = ExtResource("3_wj120")
+size = 10.0
+color = Color(0.407843, 0.454902, 0.6, 1)
