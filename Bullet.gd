@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-const SPEED = 300.0
+const SPEED = 1000.0
 
 const PARTICLES = preload("res://particles/bullet_collision.tscn")
 

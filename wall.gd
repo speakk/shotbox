@@ -15,10 +15,10 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 			
 			var y_diff = $ColorRect.size.y - collision_point.y
 			
-			if $ColorRect.size.y < 10:
+			if $ColorRect.size.y < 30:
 				queue_free()
 			
-			if y_diff < 3 or collision_point.y < 3:
+			if collision_point.y < 10:
 				continue
 				
 			var particles = PARTICLES.instantiate()

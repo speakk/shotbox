@@ -7,8 +7,9 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_dm4kp"]
 radius = 20.0
 
-[node name="Player" type="RigidBody2D"]
+[node name="Player" type="RigidBody2D" groups=["player"]]
 collision_layer = 4
+collision_mask = 9
 gravity_scale = 0.0
 linear_damp = 10.0
 script = ExtResource("1_dphtp")
