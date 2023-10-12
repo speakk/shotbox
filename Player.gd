@@ -7,7 +7,7 @@ const HAND_DISTANCE = 50
 
 const BULLET = preload("res://bullet.tscn")
 
-const BULLET_DELAY = 0.06
+const BULLET_DELAY = 0.1
 var _can_shoot = true
 var _bullet_timer = 0
 

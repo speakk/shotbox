@@ -18,15 +18,13 @@ width = 32
 curve = SubResource("Curve_5uvm6")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_doaj1"]
+particle_flag_disable_z = true
 emission_shape = 2
 emission_sphere_radius = 1.0
-particle_flag_disable_z = true
 spread = 180.0
-gravity = Vector3(0, 0, 0)
 initial_velocity_min = 30.0
 initial_velocity_max = 50.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
+gravity = Vector3(0, 0, 0)
 damping_min = 20.0
 damping_max = 30.0
 scale_min = 3.0

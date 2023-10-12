@@ -7,6 +7,7 @@
 
 [sub_resource type="Environment" id="Environment_7hyuh"]
 background_mode = 3
+background_canvas_max_layer = 2
 glow_enabled = true
 glow_intensity = 1.0
 glow_bloom = 0.4
@@ -14,118 +15,124 @@ glow_bloom = 0.4
 [node name="Main" type="Node2D"]
 script = ExtResource("1_itbag")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_7hyuh")
+[node name="GroundLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
 
-[node name="Player" parent="." instance=ExtResource("1_hcagr")]
+[node name="ForegroundLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="Player" parent="ForegroundLayer" instance=ExtResource("1_hcagr")]
 position = Vector2(1011, 562)
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Camera2D" type="Camera2D" parent="ForegroundLayer/Player"]
 
-[node name="Wall" parent="." instance=ExtResource("2_8u8dx")]
+[node name="Wall" parent="ForegroundLayer" instance=ExtResource("2_8u8dx")]
 position = Vector2(889, 502)
 
-[node name="Wall2" parent="." instance=ExtResource("2_8u8dx")]
+[node name="Wall2" parent="ForegroundLayer" instance=ExtResource("2_8u8dx")]
 position = Vector2(1144, 499)
 
-[node name="Wall5" parent="." instance=ExtResource("2_8u8dx")]
+[node name="Wall5" parent="ForegroundLayer" instance=ExtResource("2_8u8dx")]
 position = Vector2(884, 493)
 rotation = -1.57079
 
-[node name="Wall7" parent="." instance=ExtResource("2_8u8dx")]
+[node name="Wall7" parent="ForegroundLayer" instance=ExtResource("2_8u8dx")]
 position = Vector2(884, 642)
 rotation = -1.57079
 
-[node name="Wall8" parent="." instance=ExtResource("2_8u8dx")]
+[node name="Wall8" parent="ForegroundLayer" instance=ExtResource("2_8u8dx")]
 position = Vector2(1021, 642)
 rotation = -1.57079
 
-[node name="Wall6" parent="." instance=ExtResource("2_8u8dx")]
+[node name="Wall6" parent="ForegroundLayer" instance=ExtResource("2_8u8dx")]
 position = Vector2(1019, 493)
 rotation = -1.57079
 
-[node name="Wall3" parent="." instance=ExtResource("2_8u8dx")]
+[node name="Wall3" parent="ForegroundLayer" instance=ExtResource("2_8u8dx")]
 position = Vector2(720, 630)
 
-[node name="Wall4" parent="." instance=ExtResource("2_8u8dx")]
+[node name="Wall4" parent="ForegroundLayer" instance=ExtResource("2_8u8dx")]
 position = Vector2(1658, 507)
 
-[node name="Wall9" parent="." instance=ExtResource("2_8u8dx")]
+[node name="Wall9" parent="ForegroundLayer" instance=ExtResource("2_8u8dx")]
 position = Vector2(1913, 504)
 
-[node name="Wall10" parent="." instance=ExtResource("2_8u8dx")]
+[node name="Wall10" parent="ForegroundLayer" instance=ExtResource("2_8u8dx")]
 position = Vector2(1653, 498)
 rotation = -1.57079
 
-[node name="Wall11" parent="." instance=ExtResource("2_8u8dx")]
+[node name="Wall11" parent="ForegroundLayer" instance=ExtResource("2_8u8dx")]
 position = Vector2(1653, 647)
 rotation = -1.57079
 
-[node name="Wall12" parent="." instance=ExtResource("2_8u8dx")]
+[node name="Wall12" parent="ForegroundLayer" instance=ExtResource("2_8u8dx")]
 position = Vector2(1790, 647)
 rotation = -1.57079
 
-[node name="Wall13" parent="." instance=ExtResource("2_8u8dx")]
+[node name="Wall13" parent="ForegroundLayer" instance=ExtResource("2_8u8dx")]
 position = Vector2(1788, 498)
 rotation = -1.57079
 
-[node name="Wall14" parent="." instance=ExtResource("2_8u8dx")]
+[node name="Wall14" parent="ForegroundLayer" instance=ExtResource("2_8u8dx")]
 position = Vector2(1489, 635)
 
-[node name="Wall15" parent="." instance=ExtResource("2_8u8dx")]
+[node name="Wall15" parent="ForegroundLayer" instance=ExtResource("2_8u8dx")]
 position = Vector2(907, 1008)
 
-[node name="Wall16" parent="." instance=ExtResource("2_8u8dx")]
+[node name="Wall16" parent="ForegroundLayer" instance=ExtResource("2_8u8dx")]
 position = Vector2(1162, 1005)
 
-[node name="Wall17" parent="." instance=ExtResource("2_8u8dx")]
+[node name="Wall17" parent="ForegroundLayer" instance=ExtResource("2_8u8dx")]
 position = Vector2(902, 999)
 rotation = -1.57079
 
-[node name="Wall18" parent="." instance=ExtResource("2_8u8dx")]
+[node name="Wall18" parent="ForegroundLayer" instance=ExtResource("2_8u8dx")]
 position = Vector2(902, 1148)
 rotation = -1.57079
 
-[node name="Wall19" parent="." instance=ExtResource("2_8u8dx")]
+[node name="Wall19" parent="ForegroundLayer" instance=ExtResource("2_8u8dx")]
 position = Vector2(1039, 1148)
 rotation = -1.57079
 
-[node name="Wall20" parent="." instance=ExtResource("2_8u8dx")]
+[node name="Wall20" parent="ForegroundLayer" instance=ExtResource("2_8u8dx")]
 position = Vector2(1037, 999)
 rotation = -1.57079
 
-[node name="Wall21" parent="." instance=ExtResource("2_8u8dx")]
+[node name="Wall21" parent="ForegroundLayer" instance=ExtResource("2_8u8dx")]
 position = Vector2(738, 1136)
 
-[node name="Enemy" parent="." instance=ExtResource("4_2yk5v")]
+[node name="Enemy" parent="ForegroundLayer" instance=ExtResource("4_2yk5v")]
 position = Vector2(640, 373)
 
-[node name="Enemy2" parent="." instance=ExtResource("4_2yk5v")]
+[node name="Enemy2" parent="ForegroundLayer" instance=ExtResource("4_2yk5v")]
 position = Vector2(1313, 423)
 
-[node name="Enemy3" parent="." instance=ExtResource("4_2yk5v")]
+[node name="Enemy3" parent="ForegroundLayer" instance=ExtResource("4_2yk5v")]
 position = Vector2(1247, 816)
 
-[node name="Enemy4" parent="." instance=ExtResource("4_2yk5v")]
+[node name="Enemy4" parent="ForegroundLayer" instance=ExtResource("4_2yk5v")]
 position = Vector2(1932, 1035)
 
-[node name="Enemy5" parent="." instance=ExtResource("4_2yk5v")]
+[node name="Enemy5" parent="ForegroundLayer" instance=ExtResource("4_2yk5v")]
 position = Vector2(1010, 1257)
 
-[node name="Enemy6" parent="." instance=ExtResource("4_2yk5v")]
+[node name="Enemy6" parent="ForegroundLayer" instance=ExtResource("4_2yk5v")]
 position = Vector2(1721, 562)
 
-[node name="Enemy7" parent="." instance=ExtResource("4_2yk5v")]
+[node name="Enemy7" parent="ForegroundLayer" instance=ExtResource("4_2yk5v")]
 position = Vector2(1839, 577)
 
-[node name="Enemy8" parent="." instance=ExtResource("4_2yk5v")]
+[node name="Enemy8" parent="ForegroundLayer" instance=ExtResource("4_2yk5v")]
 position = Vector2(1000, 1073)
 
-[node name="Enemy9" parent="." instance=ExtResource("4_2yk5v")]
+[node name="Enemy9" parent="ForegroundLayer" instance=ExtResource("4_2yk5v")]
 position = Vector2(471, 1083)
 
-[node name="Enemy10" parent="." instance=ExtResource("4_2yk5v")]
+[node name="Enemy10" parent="ForegroundLayer" instance=ExtResource("4_2yk5v")]
 position = Vector2(1028, -386)
 
-[node name="Enemy11" parent="." instance=ExtResource("4_2yk5v")]
+[node name="Enemy11" parent="ForegroundLayer" instance=ExtResource("4_2yk5v")]
 position = Vector2(1623, -331)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7hyuh")
