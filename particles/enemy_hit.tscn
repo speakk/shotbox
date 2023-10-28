@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://f4e1gmcjo5h"]
+[gd_scene load_steps=9 format=3 uid="uid://f4e1gmcjo5h"]
 
 [ext_resource type="Script" path="res://particles/bullet_collision.gd" id="1_qc2y6"]
 
@@ -8,6 +8,14 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_1dwqs"]
 gradient = SubResource("Gradient_1vsu8")
+
+[sub_resource type="Curve" id="Curve_bwmx0"]
+max_value = 10.0
+_data = [Vector2(0, 0.0329671), 0.0, -1.7351, 0, 0, Vector2(0.113333, 0.21978), 0.0, 0.0, 0, 0, Vector2(0.22, 10), -1.31868, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_qwmgb"]
+curve = SubResource("Curve_bwmx0")
 
 [sub_resource type="Curve" id="Curve_0qg87"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.835165), 0.0, 0.0, 0, 0]
@@ -25,8 +33,8 @@ spread = 47.37
 initial_velocity_min = 100.0
 initial_velocity_max = 250.0
 gravity = Vector3(0, 0, 0)
-damping_min = 300.0
-damping_max = 400.0
+damping_max = 5.0
+damping_curve = SubResource("CurveTexture_qwmgb")
 scale_min = 3.0
 scale_max = 10.0
 scale_curve = SubResource("CurveTexture_0rgap")

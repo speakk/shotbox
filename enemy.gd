@@ -29,6 +29,7 @@ func _got_hit(collision_point, direction):
 	particles.global_position = collision_point
 	get_tree().root.get_node("Main").get_node("GroundLayer").add_child(particles)
 	#get_parent().add_child(particles)
+	#particles.process_material.di
 	particles.process_material.direction = Vector3(-direction.x, -direction.y, 0)
 	particles.emitting = true
 	$AnimationPlayer.play("got_hit")
