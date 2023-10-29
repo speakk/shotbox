@@ -16,12 +16,17 @@ func _ready():
 	$AnimationPlayer.play("RESET")
 
 func _physics_process(delta):
-	#target_position_check_timer -= delta
-	#if target_position_check_timer < 0:
+	target_position_check_timer -= delta
+	if target_position_check_timer < 0:
+		var player = get_tree().get_first_node_in_group("player")
+		final_target_position = player.global_position
 		
-	#if not target:
-	var player = get_tree().get_first_node_in_group("player")
-	apply_central_force(global_position.direction_to(player.global_position) * SPEED * delta)
+		$NavigationAgent2D.target_position = final_target_position
+		target_position_check_timer = target_position_check_interval
+		
+		#await get_tree().physics_frame
+	
+	apply_central_force(global_position.direction_to($NavigationAgent2D.get_next_path_position()) * SPEED * delta)
 
 func _integrate_forces(state: PhysicsDirectBodyState2D):
 	for i in state.get_contact_count():

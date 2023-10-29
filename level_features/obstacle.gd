@@ -26,6 +26,15 @@ func create_light_occluder(polygon, new_position, new_rotation, new_scale) -> Li
 	lightOccluder.scale = new_scale
 	
 	return lightOccluder
+
+func create_navigation_obstacle(polygon, new_position, new_rotation, new_scale) -> NavigationObstacle2D:
+	var navigationObstacle = NavigationObstacle2D.new()
+	navigationObstacle.vertices = polygon.duplicate()
+	navigationObstacle.position = new_position
+	navigationObstacle.rotation = new_rotation
+	navigationObstacle.scale = new_scale
+	
+	return navigationObstacle
 	
 func create_draw_polygon(polygon, new_position, new_rotation, new_scale):
 	var drawPolygon = Polygon2D.new()
