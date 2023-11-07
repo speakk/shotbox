@@ -1,12 +1,26 @@
-[gd_scene load_steps=6 format=3 uid="uid://7f2hbyc3l8nu"]
+[gd_scene load_steps=9 format=3 uid="uid://7f2hbyc3l8nu"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_dphtp"]
-[ext_resource type="PackedScene" uid="uid://djlr4c64qtm5x" path="res://circle.tscn" id="2_ij81c"]
+[ext_resource type="Shader" path="res://flash.gdshader" id="2_8qc8l"]
 [ext_resource type="Script" path="res://circle.gd" id="3_wj120"]
 [ext_resource type="PackedScene" uid="uid://coppvub64whip" path="res://components/shooter.tscn" id="4_jmgva"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dm4kp"]
 radius = 20.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8ydel"]
+shader = ExtResource("2_8qc8l")
+shader_parameter/flash_amount = 0.0
+
+[sub_resource type="Gradient" id="Gradient_5yrl4"]
+offsets = PackedFloat32Array(0, 0.987013, 0.993506)
+colors = PackedColorArray(0.435294, 0.556863, 0.658824, 1, 0.35536, 0.474701, 0.53125, 1, 0.623529, 0.74902, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fiifq"]
+gradient = SubResource("Gradient_5yrl4")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
 
 [node name="Player" type="RigidBody2D" groups=["player"]]
 collision_layer = 4
@@ -19,9 +33,10 @@ script = ExtResource("1_dphtp")
 visible = false
 shape = SubResource("CircleShape2D_dm4kp")
 
-[node name="Circle" parent="." instance=ExtResource("2_ij81c")]
-size = 20.0
-color = Color(0.345098, 0.462745, 0.6, 1)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_8ydel")
+scale = Vector2(0.656, 0.656)
+texture = SubResource("GradientTexture2D_fiifq")
 
 [node name="Hand" type="Node2D" parent="."]
 script = ExtResource("3_wj120")

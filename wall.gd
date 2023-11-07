@@ -30,7 +30,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 			var duplicated_wall = duplicate_unique()
 			duplicated_wall.global_position = global_collision_point
 			duplicated_wall.set_y_size(y_diff)
-			get_parent().add_child(duplicated_wall)
+			get_parent().call_deferred("add_child", duplicated_wall)
 
 func duplicate_unique():
 	var duplicated = duplicate()

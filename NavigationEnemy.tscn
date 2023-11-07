@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://btc4ohv77jipy"]
+[gd_scene load_steps=14 format=3 uid="uid://btc4ohv77jipy"]
 
 [ext_resource type="Script" path="res://navigation_enemy.gd" id="1_4nq04"]
 [ext_resource type="Shader" path="res://flash.gdshader" id="3_ahnay"]
@@ -71,12 +71,22 @@ _data = {
 shader = ExtResource("3_ahnay")
 shader_parameter/flash_amount = 0.0
 
-[sub_resource type="Gradient" id="Gradient_5yrl4"]
+[sub_resource type="Gradient" id="Gradient_xpb2c"]
 offsets = PackedFloat32Array(0, 0.980519, 0.993506)
-colors = PackedColorArray(0.578125, 0.245646, 0.215416, 1, 0.609375, 0.228513, 0.155429, 1, 1, 0.333003, 0.392774, 0)
+colors = PackedColorArray(0.878906, 0.501002, 0.514118, 1, 0.851562, 0.649276, 0.623806, 1, 0.886719, 0.631246, 0.684592, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hptfi"]
+gradient = SubResource("Gradient_xpb2c")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_sat1g"]
+offsets = PackedFloat32Array(0, 0.980519, 0.993506)
+colors = PackedColorArray(0.632812, 0.212324, 0.22649, 1, 0.375, 0.225127, 0.236329, 1, 1, 0.333003, 0.392774, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_dfp6o"]
-gradient = SubResource("Gradient_5yrl4")
+gradient = SubResource("Gradient_sat1g")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(1, 0.5)
@@ -84,7 +94,7 @@ fill_to = Vector2(1, 0.5)
 [sub_resource type="CircleShape2D" id="CircleShape2D_jfy2w"]
 radius = 432.296
 
-[node name="NavigationEnemy" type="RigidBody2D"]
+[node name="s" type="RigidBody2D"]
 collision_layer = 16
 collision_mask = 30
 max_contacts_reported = 2
@@ -99,6 +109,11 @@ libraries = {
 "": SubResource("AnimationLibrary_h151i")
 }
 
+[node name="PlayerNoticeRing" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_wmhdp")
+scale = Vector2(0.71875, 0.71875)
+texture = SubResource("GradientTexture2D_hptfi")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_wmhdp")
 scale = Vector2(0.656, 0.656)
@@ -109,6 +124,7 @@ texture = SubResource("GradientTexture2D_dfp6o")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="DetectionArea2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 16
 collision_mask = 4
 

@@ -16,6 +16,7 @@ func _ready():
 	$Sprite2D.material = $Sprite2D.material.duplicate()
 	$Health.zero_health.connect(_zero_health)
 	$AnimationPlayer.play("RESET")
+	sleeping = true
 
 func _physics_process(delta):
 	if not _player_noticed:
@@ -55,6 +56,18 @@ func _got_hit(collision_point, direction):
 	$AnimationPlayer.play("got_hit")
 	$Health.take_damage(4)
 
+func set_player_noticed(noticed):
+	if noticed:
+		_player_noticed = true
+		$PlayerNoticeRing.visible = true
+		sleeping = false
+	
+	else:
+		_player_noticed = false
+		$Sprite2D.modulate = Color.WHITE
+		$PlayerNoticeRing.visible = false
+		sleeping = true
+		
 
 func _on_detection_area_2d_body_entered(body):
 	print("Noticed!")
