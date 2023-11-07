@@ -10,12 +10,17 @@ var final_target_position
 var target_position_check_interval = 2
 var target_position_check_timer = target_position_check_interval
 
+var _player_noticed = false
+
 func _ready():
 	$Sprite2D.material = $Sprite2D.material.duplicate()
 	$Health.zero_health.connect(_zero_health)
 	$AnimationPlayer.play("RESET")
 
 func _physics_process(delta):
+	if not _player_noticed:
+		return
+		
 	target_position_check_timer -= delta
 	if target_position_check_timer < 0:
 		var player = get_tree().get_first_node_in_group("player")
@@ -49,3 +54,8 @@ func _got_hit(collision_point, direction):
 	particles.emitting = true
 	$AnimationPlayer.play("got_hit")
 	$Health.take_damage(4)
+
+
+func _on_detection_area_2d_body_entered(body):
+	print("Noticed!")
+	_player_noticed = true
