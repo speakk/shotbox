@@ -21,6 +21,10 @@ Events="*res://Events.gd"
 ResourceCache="*res://ResourceCache.gd"
 Colors="*res://Colors.gd"
 
+[display]
+
+window/vsync/vsync_mode=0
+
 [input]
 
 left={

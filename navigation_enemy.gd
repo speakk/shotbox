@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-const SPEED = 20000
+const SPEED = 800
 
 var ENEMY_HIT_PARTICLES = preload("res://particles/enemy_hit.tscn")
 
@@ -9,7 +9,7 @@ var ENEMY_HIT_PARTICLES = preload("res://particles/enemy_hit.tscn")
 var next_position_target
 var final_target_position
 
-var target_position_check_interval = 2
+var target_position_check_interval = randf_range(1.5, 2.5)
 var target_position_check_timer = target_position_check_interval
 
 var _player_noticed = false
@@ -41,7 +41,7 @@ func _physics_process(delta):
 		
 		#await get_tree().physics_frame
 	
-	apply_central_force(global_position.direction_to($NavigationAgent2D.get_next_path_position()) * SPEED * delta)
+	apply_central_force(global_position.direction_to($NavigationAgent2D.get_next_path_position()) * SPEED)
 
 func get_hit(hit_position: Vector2, hit_velocity: Vector2, damage: int):
 	var direction = hit_velocity.normalized()

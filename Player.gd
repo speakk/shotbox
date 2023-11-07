@@ -4,7 +4,7 @@ extends RigidBody2D
 
 var ENEMY_HIT_PARTICLES = preload("res://particles/enemy_hit.tscn")
 
-const SPEED = 600.0
+const SPEED = 80.0
 const DAMP = 1.0
 const HAND_DISTANCE = 50
 #const BULLET_DELAY = 0.01
@@ -28,7 +28,7 @@ func dash():
 
 func _physics_process(delta):
 	var input_velocity = get_input()
-	apply_central_force(input_velocity * SPEED * delta)
+	apply_central_force(input_velocity * SPEED)
 	
 	$Hand.global_position = global_position + global_position.direction_to(get_global_mouse_position()) * HAND_DISTANCE
 	if Input.is_action_pressed("shoot") and shooter._can_shoot:

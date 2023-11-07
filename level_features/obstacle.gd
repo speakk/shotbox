@@ -84,7 +84,7 @@ func _ready():
 	original_position = position
 	for child in children:
 		if child is CollisionPolygon2D:
-			var drawPolygon = create_draw_polygon(child.polygon, child.position, child.rotation, child.scale)
+			create_draw_polygon(child.polygon, child.position, child.rotation, child.scale)
 			#add_child(drawPolygon)
 			
 			var lightOccluder := create_light_occluder(child.polygon, child.position, child.rotation, child.scale)

@@ -4,7 +4,6 @@ class_name Bullet
 
 @export_flags_2d_physics var target_mask_layers:
 	set(mask):
-		print("Setting mask: ", mask)
 		collision_mask = mask
 		target_mask_layers = mask
 
