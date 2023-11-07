@@ -134,5 +134,6 @@ shape = SubResource("CircleShape2D_jfy2w")
 
 [node name="Shooter" parent="." instance=ExtResource("4_angsu")]
 target_mask_layers = 12
+BULLET_DELAY = 0.5
 
 [connection signal="body_entered" from="DetectionArea2D" to="." method="_on_detection_area_2d_body_entered"]

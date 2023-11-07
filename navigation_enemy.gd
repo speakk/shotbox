@@ -27,6 +27,8 @@ func _physics_process(delta):
 		return
 	
 	var player = get_tree().get_first_node_in_group("player")
+	if not player:
+		return
 	
 	if shooter._can_shoot:
 		shooter.shoot(global_position, global_position.direction_to(player.global_position))
@@ -67,6 +69,5 @@ func set_player_noticed(noticed):
 		sleeping = true
 		
 
-func _on_detection_area_2d_body_entered(body):
-	print("Noticed!")
+func _on_detection_area_2d_body_entered(_body):
 	_player_noticed = true

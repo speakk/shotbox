@@ -2,6 +2,8 @@ extends RigidBody2D
 
 @onready var shooter = $Shooter as Shooter
 
+var ENEMY_HIT_PARTICLES = preload("res://particles/enemy_hit.tscn")
+
 const SPEED = 600.0
 const DAMP = 1.0
 const HAND_DISTANCE = 50
@@ -11,6 +13,12 @@ const DASH_DELAY = 1
 const DASH_SPEED = 4000
 var _can_dash = true
 var _dash_timer = 0
+
+func _ready():
+	$Health.zero_health.connect(_zero_health)
+
+func _zero_health():
+	queue_free()
 
 func dash():
 	#apply_central_impulse(global_position.direction_to(get_global_mouse_position()) * DASH_SPEED)
@@ -50,3 +58,13 @@ func get_input():
 		#velocity = input_velocity
 	
 	return input_velocity
+
+
+func get_hit(hit_position: Vector2, hit_velocity: Vector2, damage: int):
+	var direction = hit_velocity.normalized()
+	var particles = ENEMY_HIT_PARTICLES.instantiate() as GPUParticles2D
+	particles.global_position = hit_position
+	get_tree().root.get_node("Main").get_node("GroundLayer").add_child(particles)
+	particles.process_material.direction = Vector3(-direction.x, -direction.y, 0)
+	particles.emitting = true
+	$Health.take_damage(damage)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ddgfyyjl0s8rq"]
+[gd_scene load_steps=12 format=3 uid="uid://ddgfyyjl0s8rq"]
 
 [ext_resource type="PackedScene" uid="uid://7f2hbyc3l8nu" path="res://player.tscn" id="1_hcagr"]
 [ext_resource type="Script" path="res://main.gd" id="1_itbag"]
@@ -13,6 +13,21 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(720, 736, 5296, 736, 52
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_oaswp"]
+resource_local_to_scene = true
+friction = 0.2
+bounce = 0.1
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_uphgd"]
+resource_local_to_scene = true
+friction = 0.2
+bounce = 0.1
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kk7lk"]
+resource_local_to_scene = true
+friction = 0.2
+bounce = 0.1
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_i8h2c"]
 resource_local_to_scene = true
 friction = 0.2
 bounce = 0.1
@@ -39,10 +54,11 @@ position = Vector2(208, 112)
 [node name="Camera2D" type="Camera2D" parent="ForegroundLayer/Player"]
 
 [node name="Wall" parent="ForegroundLayer" instance=ExtResource("2_8u8dx")]
-position = Vector2(889, 502)
+position = Vector2(256, 1664)
+rotation = 1.57079
 
 [node name="Wall2" parent="ForegroundLayer" instance=ExtResource("2_8u8dx")]
-position = Vector2(883, 1648)
+position = Vector2(900, 1456)
 rotation = 1.5708
 
 [node name="NavigationEnemy" parent="ForegroundLayer" instance=ExtResource("6_ocfxt")]
@@ -73,21 +89,21 @@ polygon = PackedVector2Array(16, 944, 0, 3008, 4528, 2992, 4528, 944, 64, 944, 6
 
 [node name="Obstacle3" parent="ForegroundLayer/NavigationRegion2D" instance=ExtResource("5_0el2t")]
 position = Vector2(752, -176)
-physics_material_override = SubResource("PhysicsMaterial_oaswp")
+physics_material_override = SubResource("PhysicsMaterial_uphgd")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ForegroundLayer/NavigationRegion2D/Obstacle3"]
 polygon = PackedVector2Array(416, 944, 400, 2608, 464, 2608, 464, 944)
 
 [node name="Obstacle4" parent="ForegroundLayer/NavigationRegion2D" instance=ExtResource("5_0el2t")]
 position = Vector2(752, -176)
-physics_material_override = SubResource("PhysicsMaterial_oaswp")
+physics_material_override = SubResource("PhysicsMaterial_kk7lk")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ForegroundLayer/NavigationRegion2D/Obstacle4"]
 polygon = PackedVector2Array(768, 2608, 464, 2608, 464, 1584, 1424, 1584, 1424, 1616, 496, 1616, 496, 2576, 768, 2576)
 
 [node name="Obstacle5" parent="ForegroundLayer/NavigationRegion2D" instance=ExtResource("5_0el2t")]
 position = Vector2(752, -176)
-physics_material_override = SubResource("PhysicsMaterial_oaswp")
+physics_material_override = SubResource("PhysicsMaterial_i8h2c")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ForegroundLayer/NavigationRegion2D/Obstacle5"]
 polygon = PackedVector2Array(912, 2576, 1680, 2576, 1680, 1616, 1552, 1616, 1552, 1584, 1712, 1584, 1712, 2608, 912, 2608)

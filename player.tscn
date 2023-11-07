@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://7f2hbyc3l8nu"]
+[gd_scene load_steps=10 format=3 uid="uid://7f2hbyc3l8nu"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_dphtp"]
 [ext_resource type="Shader" path="res://flash.gdshader" id="2_8qc8l"]
 [ext_resource type="Script" path="res://circle.gd" id="3_wj120"]
 [ext_resource type="PackedScene" uid="uid://coppvub64whip" path="res://components/shooter.tscn" id="4_jmgva"]
+[ext_resource type="PackedScene" uid="uid://b7qtojfdy1adg" path="res://components/health.tscn" id="5_75jtr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dm4kp"]
 radius = 20.0
@@ -45,3 +46,5 @@ color = Color(0.407843, 0.454902, 0.6, 1)
 
 [node name="Shooter" parent="." instance=ExtResource("4_jmgva")]
 target_mask_layers = 24
+
+[node name="Health" parent="." instance=ExtResource("5_75jtr")]

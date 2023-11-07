@@ -41,6 +41,9 @@ scale_curve = SubResource("CurveTexture_0rgap")
 color = Color(0.733333, 0.117647, 0.0901961, 1)
 color_ramp = SubResource("GradientTexture1D_1dwqs")
 hue_variation_max = 0.03
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
 
 [node name="EnemyHit" type="GPUParticles2D"]
 emitting = false
