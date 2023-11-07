@@ -27,6 +27,9 @@ fill_to = Vector2(1, 0.5)
 collision_layer = 4
 collision_mask = 9
 gravity_scale = 0.0
+continuous_cd = 2
+max_contacts_reported = 4
+contact_monitor = true
 linear_damp = 10.0
 script = ExtResource("1_dphtp")
 
