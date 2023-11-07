@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://btc4ohv77jipy"]
+[gd_scene load_steps=15 format=3 uid="uid://btc4ohv77jipy"]
 
 [ext_resource type="Script" path="res://navigation_enemy.gd" id="1_4nq04"]
 [ext_resource type="Shader" path="res://flash.gdshader" id="3_ahnay"]
 [ext_resource type="PackedScene" uid="uid://b7qtojfdy1adg" path="res://components/health.tscn" id="4_38ryi"]
+[ext_resource type="PackedScene" uid="uid://coppvub64whip" path="res://components/shooter.tscn" id="4_angsu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xq5uc"]
 radius = 20.0
@@ -94,9 +95,9 @@ fill_to = Vector2(1, 0.5)
 [sub_resource type="CircleShape2D" id="CircleShape2D_jfy2w"]
 radius = 432.296
 
-[node name="s" type="RigidBody2D"]
+[node name="NavigationEnemy" type="RigidBody2D"]
 collision_layer = 16
-collision_mask = 30
+collision_mask = 28
 max_contacts_reported = 2
 contact_monitor = true
 script = ExtResource("1_4nq04")
@@ -130,5 +131,8 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea2D"]
 shape = SubResource("CircleShape2D_jfy2w")
+
+[node name="Shooter" parent="." instance=ExtResource("4_angsu")]
+target_mask_layers = 12
 
 [connection signal="body_entered" from="DetectionArea2D" to="." method="_on_detection_area_2d_body_entered"]

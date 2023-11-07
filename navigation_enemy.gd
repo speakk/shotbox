@@ -4,6 +4,8 @@ const SPEED = 20000
 
 var ENEMY_HIT_PARTICLES = preload("res://particles/enemy_hit.tscn")
 
+@onready var shooter = $Shooter as Shooter
+
 var next_position_target
 var final_target_position
 
@@ -19,12 +21,17 @@ func _ready():
 	sleeping = true
 
 func _physics_process(delta):
+	target_position_check_timer -= delta
+	
 	if not _player_noticed:
 		return
+	
+	var player = get_tree().get_first_node_in_group("player")
+	
+	if shooter._can_shoot:
+		shooter.shoot(global_position, global_position.direction_to(player.global_position))
 		
-	target_position_check_timer -= delta
 	if target_position_check_timer < 0:
-		var player = get_tree().get_first_node_in_group("player")
 		final_target_position = player.global_position
 		
 		$NavigationAgent2D.target_position = final_target_position
@@ -34,27 +41,18 @@ func _physics_process(delta):
 	
 	apply_central_force(global_position.direction_to($NavigationAgent2D.get_next_path_position()) * SPEED * delta)
 
-func _integrate_forces(state: PhysicsDirectBodyState2D):
-	for i in state.get_contact_count():
-		var object = state.get_contact_collider_object(i)
-		if object.is_in_group("bullets"):
-			var global_collision_point = state.get_contact_collider_position(i)
-			var direction = state.get_contact_collider_velocity_at_position(i).normalized()
-			_got_hit(global_collision_point, direction)
-
-func _zero_health():
-	queue_free()
-
-func _got_hit(collision_point, direction):
+func get_hit(hit_position: Vector2, hit_velocity: Vector2, damage: int):
+	var direction = hit_velocity.normalized()
 	var particles = ENEMY_HIT_PARTICLES.instantiate() as GPUParticles2D
-	particles.global_position = collision_point
+	particles.global_position = hit_position
 	get_tree().root.get_node("Main").get_node("GroundLayer").add_child(particles)
-	#get_parent().add_child(particles)
-	#particles.process_material.di
 	particles.process_material.direction = Vector3(-direction.x, -direction.y, 0)
 	particles.emitting = true
 	$AnimationPlayer.play("got_hit")
-	$Health.take_damage(4)
+	$Health.take_damage(damage)
+	
+func _zero_health():
+	queue_free()
 
 func set_player_noticed(noticed):
 	if noticed:

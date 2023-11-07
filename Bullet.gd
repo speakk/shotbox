@@ -1,6 +1,17 @@
 extends RigidBody2D
 
+class_name Bullet
+
+@export_flags_2d_physics var target_mask_layers:
+	set(mask):
+		print("Setting mask: ", mask)
+		collision_mask = mask
+		target_mask_layers = mask
+
+@export var damage: int = 10
+
 const SPEED = 1000.0
+
 
 const PARTICLES = preload("res://particles/bullet_collision.tscn")
 
@@ -24,4 +35,11 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 		particles.top_level = true
 		get_parent().add_child(particles)
 		queue_free()
+		
+		var target = state.get_contact_collider_object(i)
+		if target.has_method("get_hit"):
+			print("WE HAVE A HIT")
+			print("mask: ", collision_mask)
+			target.get_hit(state.get_contact_collider_position(i), state.get_contact_collider_velocity_at_position(i), damage)
+		
 		break

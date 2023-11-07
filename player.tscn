@@ -44,3 +44,4 @@ size = 10.0
 color = Color(0.407843, 0.454902, 0.6, 1)
 
 [node name="Shooter" parent="." instance=ExtResource("4_jmgva")]
+target_mask_layers = 24

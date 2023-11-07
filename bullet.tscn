@@ -68,11 +68,12 @@ fill_to = Vector2(1, 0.5)
 
 [node name="Bullet" type="RigidBody2D" groups=["bullets"]]
 collision_layer = 2
-collision_mask = 24
+collision_mask = 0
 mass = 30.0
 gravity_scale = 0.0
 continuous_cd = 1
 max_contacts_reported = 2
+contact_monitor = true
 script = ExtResource("1_o4mhv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
