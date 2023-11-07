@@ -21,6 +21,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 		var particles = PARTICLES.instantiate()
 		particles.global_position = state.get_contact_collider_position(i)
 		particles.emitting = true
+		particles.top_level = true
 		get_parent().add_child(particles)
 		queue_free()
 		break
