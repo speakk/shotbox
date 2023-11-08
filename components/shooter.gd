@@ -4,6 +4,7 @@ class_name Shooter
 
 @export_flags_2d_physics var target_mask_layers
 @export var damage: int = 4
+@export var knockback: int = 320
 
 const BULLET = preload("res://bullet.tscn")
 
@@ -19,6 +20,7 @@ func shoot(from: Vector2, direction: Vector2):
 	bullet.shoot_at(from, direction)
 	_bullet_timer = BULLET_DELAY
 	_can_shoot = false
+	get_parent().apply_impulse(-direction * knockback)
 
 func _physics_process(delta):
 	_bullet_timer -= delta

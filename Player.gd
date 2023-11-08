@@ -21,7 +21,6 @@ func _zero_health():
 	queue_free()
 
 func dash():
-	#apply_central_impulse(global_position.direction_to(get_global_mouse_position()) * DASH_SPEED)
 	apply_central_impulse(linear_velocity.normalized() * DASH_SPEED)
 	_dash_timer = DASH_DELAY
 	_can_dash = false
