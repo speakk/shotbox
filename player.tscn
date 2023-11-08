@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://7f2hbyc3l8nu"]
+[gd_scene load_steps=14 format=3 uid="uid://7f2hbyc3l8nu"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_dphtp"]
 [ext_resource type="Shader" path="res://flash.gdshader" id="2_8qc8l"]
+[ext_resource type="Texture2D" uid="uid://crc3duyhcuck8" path="res://player_texture.tres" id="3_liloi"]
 [ext_resource type="Script" path="res://circle.gd" id="3_wj120"]
 [ext_resource type="PackedScene" uid="uid://coppvub64whip" path="res://components/shooter.tscn" id="4_jmgva"]
 [ext_resource type="PackedScene" uid="uid://b7qtojfdy1adg" path="res://components/health.tscn" id="5_75jtr"]
@@ -13,15 +14,27 @@ radius = 20.0
 shader = ExtResource("2_8qc8l")
 shader_parameter/flash_amount = 0.0
 
-[sub_resource type="Gradient" id="Gradient_5yrl4"]
-offsets = PackedFloat32Array(0, 0.987013, 0.993506)
-colors = PackedColorArray(0.435294, 0.556863, 0.658824, 1, 0.35536, 0.474701, 0.53125, 1, 0.623529, 0.74902, 1, 0)
+[sub_resource type="Curve" id="Curve_ow4p8"]
+_data = [Vector2(0, 0.736264), 0.0, -1.8956, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_fiifq"]
-gradient = SubResource("Gradient_5yrl4")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(1, 0.5)
+[sub_resource type="CurveTexture" id="CurveTexture_pnl7v"]
+curve = SubResource("Curve_ow4p8")
+
+[sub_resource type="Curve" id="Curve_mbp4w"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_b1wd6"]
+curve = SubResource("Curve_mbp4w")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hbb3x"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 0.3
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_b1wd6")
+alpha_curve = SubResource("CurveTexture_pnl7v")
 
 [node name="Player" type="RigidBody2D" groups=["player"]]
 collision_layer = 4
@@ -40,7 +53,7 @@ shape = SubResource("CircleShape2D_dm4kp")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_8ydel")
 scale = Vector2(0.656, 0.656)
-texture = SubResource("GradientTexture2D_fiifq")
+texture = ExtResource("3_liloi")
 
 [node name="Hand" type="Node2D" parent="."]
 script = ExtResource("3_wj120")
@@ -51,3 +64,10 @@ color = Color(0.407843, 0.454902, 0.6, 1)
 target_mask_layers = 24
 
 [node name="Health" parent="." instance=ExtResource("5_75jtr")]
+
+[node name="TrailParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 160
+process_material = SubResource("ParticleProcessMaterial_hbb3x")
+texture = ExtResource("3_liloi")
+fixed_fps = 60

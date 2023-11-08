@@ -10,7 +10,7 @@ const HAND_DISTANCE = 50
 #const BULLET_DELAY = 0.01
 
 const DASH_DELAY = 1
-const DASH_SPEED = 4000
+const DASH_SPEED = 2000
 var _can_dash = true
 var _dash_timer = 0
 
@@ -25,6 +25,9 @@ func dash():
 	apply_central_impulse(linear_velocity.normalized() * DASH_SPEED)
 	_dash_timer = DASH_DELAY
 	_can_dash = false
+	$TrailParticles.emitting = true
+	await get_tree().create_timer(0.25).timeout
+	$TrailParticles.emitting = false
 
 func _physics_process(delta):
 	var input_velocity = get_input()
