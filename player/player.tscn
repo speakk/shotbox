@@ -1,8 +1,8 @@
 [gd_scene load_steps=14 format=3 uid="uid://7f2hbyc3l8nu"]
 
-[ext_resource type="Script" path="res://Player.gd" id="1_dphtp"]
+[ext_resource type="Script" path="res://player/Player.gd" id="1_w4agj"]
 [ext_resource type="Shader" path="res://flash.gdshader" id="2_8qc8l"]
-[ext_resource type="Texture2D" uid="uid://crc3duyhcuck8" path="res://player_texture.tres" id="3_liloi"]
+[ext_resource type="Texture2D" uid="uid://crc3duyhcuck8" path="res://player/player_texture.tres" id="3_liloi"]
 [ext_resource type="Script" path="res://circle.gd" id="3_wj120"]
 [ext_resource type="PackedScene" uid="uid://coppvub64whip" path="res://components/shooter.tscn" id="4_jmgva"]
 [ext_resource type="PackedScene" uid="uid://b7qtojfdy1adg" path="res://components/health.tscn" id="5_75jtr"]
@@ -44,7 +44,7 @@ continuous_cd = 2
 max_contacts_reported = 4
 contact_monitor = true
 linear_damp = 10.0
-script = ExtResource("1_dphtp")
+script = ExtResource("1_w4agj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -71,3 +71,5 @@ amount = 160
 process_material = SubResource("ParticleProcessMaterial_hbb3x")
 texture = ExtResource("3_liloi")
 fixed_fps = 60
+
+[node name="Camera2D" type="Camera2D" parent="."]
