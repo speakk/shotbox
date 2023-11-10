@@ -18,7 +18,10 @@ func _ready():
 	$Health.zero_health.connect(_zero_health)
 
 func _zero_health():
-	queue_free()
+	#queue_free()
+	visible = false
+	sleeping = true
+	Events.player_died.emit()
 
 func dash():
 	apply_central_impulse(linear_velocity.normalized() * DASH_SPEED)
@@ -66,7 +69,8 @@ func get_hit(hit_position: Vector2, hit_velocity: Vector2, damage: int):
 	var direction = hit_velocity.normalized()
 	var particles = ENEMY_HIT_PARTICLES.instantiate() as GPUParticles2D
 	particles.global_position = hit_position
-	get_tree().root.get_node("Main").get_node("GroundLayer").add_child(particles)
+	#get_tree().root.get_node("Main").get_node("GroundLayer").add_child(particles)
+	get_parent().add_child(particles)
 	particles.process_material.direction = Vector3(-direction.x, -direction.y, 0)
 	particles.emitting = true
 	$Health.take_damage(damage)

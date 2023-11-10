@@ -1,15 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://caxum13s3imdw"]
+[gd_scene load_steps=9 format=3 uid="uid://caxum13s3imdw"]
 
 [ext_resource type="PackedScene" uid="uid://b3exqcsiecey8" path="res://levels/base_level.tscn" id="1_d0dop"]
 [ext_resource type="PackedScene" path="res://level_features/end_zone.tscn" id="2_0rfpp"]
-[ext_resource type="PackedScene" path="res://level_features/world_bounds.tscn" id="2_hal4f"]
+[ext_resource type="PackedScene" uid="uid://bebatcosug0cq" path="res://level_features/world_bounds.tscn" id="2_hal4f"]
 [ext_resource type="PackedScene" path="res://level_features/player_marker.tscn" id="3_cnmb3"]
 [ext_resource type="PackedScene" uid="uid://odb66sy5mvpj" path="res://level_features/obstacle.tscn" id="4_g2syi"]
+[ext_resource type="PackedScene" uid="uid://btc4ohv77jipy" path="res://NavigationEnemy.tscn" id="6_c5twk"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_c3rp6"]
-resource_local_to_scene = true
-friction = 0.2
-bounce = 0.1
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_lwrwp"]
+vertices = PackedVector2Array(1418, 390, 954, 390, 954, 10, 1526, 10, 1526, 566, 1418, 458, 886, 566, 886, 458, 938, 858, 938, 714, 1674, 714, 1622, 774, 1674, 10, 1782, 10, 1782, 314, 1834, 314, 1834, 10, 2262, 10, 2262, 374, 1782, 374, 1782, 918, 1674, 774, 1674, 918, 1622, 918, 778, 918, 886, 858, 778, 678, 726, 678, 726, 870, 298, 870, 298, 234, 726, 234, 726, 586, 778, 586, 778, 166, 886, 10, 298, 10, 298, 166)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4, 5), PackedInt32Array(5, 4, 6, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(10, 12, 13, 14), PackedInt32Array(15, 16, 17, 18), PackedInt32Array(15, 18, 19, 14), PackedInt32Array(10, 14, 19), PackedInt32Array(10, 19, 20, 21), PackedInt32Array(20, 22, 21), PackedInt32Array(10, 21, 11), PackedInt32Array(8, 11, 23, 24), PackedInt32Array(25, 8, 24), PackedInt32Array(25, 24, 26, 6), PackedInt32Array(27, 28, 29, 30), PackedInt32Array(30, 31, 32), PackedInt32Array(27, 30, 32, 26), PackedInt32Array(26, 32, 33), PackedInt32Array(6, 26, 33), PackedInt32Array(6, 33, 34, 7), PackedInt32Array(35, 7, 34), PackedInt32Array(36, 35, 34, 37)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(288, 0, 2272, 0, 2272, 928, 288, 928)])
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hhuj8"]
 resource_local_to_scene = true
@@ -25,13 +26,12 @@ z_as_relative = false
 position = Vector2(288, 0)
 
 [node name="ColorRect" type="ColorRect" parent="WorldBounds" index="0"]
-offset_right = 768.0
-offset_bottom = 512.0
+offset_right = 1984.0
+offset_bottom = 928.0
 color = Color(0.188235, 0.513726, 1, 1)
-metadata/_edit_use_anchors_ = true
 
 [node name="EndZone" parent="." index="2" instance=ExtResource("2_0rfpp")]
-position = Vector2(512, 64)
+position = Vector2(2080, 0)
 
 [node name="EndZoneRect" parent="EndZone" index="0"]
 offset_left = 32.0
@@ -53,19 +53,81 @@ position = Vector2(112, 32)
 [node name="PlayerMarker" parent="." index="3" instance=ExtResource("3_cnmb3")]
 position = Vector2(399, 96)
 
-[node name="Obstacle2" parent="." index="4" instance=ExtResource("4_g2syi")]
-position = Vector2(192, 128)
-collision_mask = 7
-physics_material_override = SubResource("PhysicsMaterial_c3rp6")
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." index="4"]
+navigation_polygon = SubResource("NavigationPolygon_lwrwp")
 
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Obstacle2" index="0"]
-polygon = PackedVector2Array(96, -128, 160, -64, 160, 256, 224, 320, 736, 320, 800, 256, 800, 0, 736, -64, 160, -64, 96, -128, 864, -128, 864, 384, 96, 384)
-
-[node name="Obstacle3" parent="." index="5" instance=ExtResource("4_g2syi")]
+[node name="Obstacle3" parent="NavigationRegion2D" index="0" instance=ExtResource("4_g2syi")]
 position = Vector2(192, 128)
 physics_material_override = SubResource("PhysicsMaterial_hhuj8")
 
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Obstacle3" index="0"]
-polygon = PackedVector2Array(256, -64, 256, 160, 352, 224, 640, 224, 704, 192, 704, 64, 640, 0, 352, 0, 352, -64)
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="NavigationRegion2D/Obstacle3" index="0"]
+polygon = PackedVector2Array(96, 48, 576, 48, 576, 96, 96, 96)
+
+[node name="Obstacle4" parent="NavigationRegion2D" index="1" instance=ExtResource("4_g2syi")]
+position = Vector2(192, 128)
+physics_material_override = SubResource("PhysicsMaterial_hhuj8")
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="NavigationRegion2D/Obstacle4" index="0"]
+polygon = PackedVector2Array(704, -128, 704, 96, 704, 320, 1216, 320, 1216, 272, 1088, 272, 752, 272, 752, 48, 752, -128)
+
+[node name="Obstacle5" parent="NavigationRegion2D" index="2" instance=ExtResource("4_g2syi")]
+position = Vector2(192, 128)
+physics_material_override = SubResource("PhysicsMaterial_hhuj8")
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="NavigationRegion2D/Obstacle5" index="0"]
+polygon = PackedVector2Array(576, 96, 576, 448, 544, 448, 544, 96)
+
+[node name="Obstacle6" parent="NavigationRegion2D" index="3" instance=ExtResource("4_g2syi")]
+position = Vector2(192, 128)
+physics_material_override = SubResource("PhysicsMaterial_hhuj8")
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="NavigationRegion2D/Obstacle6" index="0"]
+polygon = PackedVector2Array(544, 560, 576, 560, 576, 800, 96, 800, 96, 752, 544, 752, 544, 576)
+
+[node name="Obstacle7" parent="NavigationRegion2D" index="4" instance=ExtResource("4_g2syi")]
+position = Vector2(192, 128)
+physics_material_override = SubResource("PhysicsMaterial_hhuj8")
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="NavigationRegion2D/Obstacle7" index="0"]
+polygon = PackedVector2Array(704, 448, 1344, 448, 1344, -128, 1472, -128, 1472, 576, 736, 576, 736, 720, 704, 720, 704, 576)
+
+[node name="Obstacle8" parent="NavigationRegion2D" index="5" instance=ExtResource("4_g2syi")]
+position = Vector2(192, 128)
+physics_material_override = SubResource("PhysicsMaterial_hhuj8")
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="NavigationRegion2D/Obstacle8" index="0"]
+polygon = PackedVector2Array(1472, 800, 1472, 656, 1440, 656, 1440, 800)
+
+[node name="Obstacle9" parent="NavigationRegion2D" index="6" instance=ExtResource("4_g2syi")]
+position = Vector2(192, 128)
+physics_material_override = SubResource("PhysicsMaterial_hhuj8")
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="NavigationRegion2D/Obstacle9" index="0"]
+polygon = PackedVector2Array(1600, 800, 1600, 256, 2080, 256, 2080, 800)
+
+[node name="Obstacle10" parent="NavigationRegion2D" index="7" instance=ExtResource("4_g2syi")]
+position = Vector2(192, 128)
+physics_material_override = SubResource("PhysicsMaterial_hhuj8")
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="NavigationRegion2D/Obstacle10" index="0"]
+polygon = PackedVector2Array(1600, -128, 1600, 176, 1632, 176, 1632, -128)
+
+[node name="NavigationEnemy" parent="." index="5" instance=ExtResource("6_c5twk")]
+position = Vector2(992, 45)
+
+[node name="NavigationEnemy2" parent="." index="6" instance=ExtResource("6_c5twk")]
+position = Vector2(1872, 32)
+
+[node name="NavigationEnemy3" parent="." index="7" instance=ExtResource("6_c5twk")]
+position = Vector2(1696, 48)
+
+[node name="NavigationEnemy4" parent="." index="8" instance=ExtResource("6_c5twk")]
+position = Vector2(971, 741)
+
+[node name="NavigationEnemy5" parent="." index="9" instance=ExtResource("6_c5twk")]
+position = Vector2(704, 848)
+
+[node name="NavigationEnemy6" parent="." index="10" instance=ExtResource("6_c5twk")]
+position = Vector2(704, 256)
 
 [editable path="EndZone"]

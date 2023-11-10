@@ -64,6 +64,7 @@ func _on_palette_changed(new_palette, _a, _b):
 func _add_body(boundary_shape, body_position):
 	var physics = StaticBody2D.new()
 	var shape = CollisionShape2D.new()
+	physics.set_collision_layer_value(4, true)
 	physics.global_position = body_position
 	physics.physics_material_override = PhysicsMaterial.new()
 	physics.physics_material_override.bounce = 0.5

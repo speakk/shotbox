@@ -47,7 +47,8 @@ func get_hit(hit_position: Vector2, hit_velocity: Vector2, damage: int):
 	var direction = hit_velocity.normalized()
 	var particles = ENEMY_HIT_PARTICLES.instantiate() as GPUParticles2D
 	particles.global_position = hit_position
-	get_tree().root.get_node("Main").get_node("GroundLayer").add_child(particles)
+	#get_tree().root.get_node("Main").get_node("GroundLayer").add_child(particles)
+	get_parent().add_child(particles)
 	particles.process_material.direction = Vector3(-direction.x, -direction.y, 0)
 	particles.emitting = true
 	$AnimationPlayer.play("got_hit")

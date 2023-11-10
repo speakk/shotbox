@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://33t6axeo8umr"]
+[gd_scene load_steps=11 format=3 uid="uid://bebatcosug0cq"]
 
 [ext_resource type="Script" path="res://level_features/WorldBounds.gd" id="1_stqbh"]
 [ext_resource type="Shader" path="res://level_features/world_bounds.gdshader" id="2_hs7t2"]

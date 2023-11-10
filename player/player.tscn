@@ -73,3 +73,4 @@ texture = ExtResource("3_liloi")
 fixed_fps = 60
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.75, 0.75)
