@@ -20,7 +20,7 @@ func _ready():
 func _zero_health():
 	#queue_free()
 	visible = false
-	sleeping = true
+	process_mode = Node.PROCESS_MODE_DISABLED
 	Events.player_died.emit()
 
 func dash():
