@@ -4,6 +4,7 @@
 [ext_resource type="Shader" path="res://flash.gdshader" id="3_ahnay"]
 [ext_resource type="PackedScene" uid="uid://b7qtojfdy1adg" path="res://components/health.tscn" id="4_38ryi"]
 [ext_resource type="PackedScene" uid="uid://coppvub64whip" path="res://components/shooter.tscn" id="4_angsu"]
+[ext_resource type="PackedScene" uid="uid://dem5jnq7i1oee" path="res://fov_detector.tscn" id="5_7n2rv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xq5uc"]
 radius = 20.0
@@ -92,9 +93,6 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(1, 0.5)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_jfy2w"]
-radius = 432.296
-
 [node name="NavigationEnemy" type="RigidBody2D"]
 collision_layer = 16
 collision_mask = 28
@@ -130,11 +128,13 @@ visible = false
 collision_layer = 16
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea2D"]
-shape = SubResource("CircleShape2D_jfy2w")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DetectionArea2D"]
+polygon = PackedVector2Array(0, 6, -128, -320, 128, -320)
 
 [node name="Shooter" parent="." instance=ExtResource("4_angsu")]
 target_mask_layers = 12
 BULLET_DELAY = 0.5
+
+[node name="FOVDetector" parent="." instance=ExtResource("5_7n2rv")]
 
 [connection signal="body_entered" from="DetectionArea2D" to="." method="_on_detection_area_2d_body_entered"]

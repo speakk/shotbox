@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dem5jnq7i1oee"]
+
+[ext_resource type="Script" path="res://fov_detector.gd" id="1_yruvu"]
+
+[node name="FOVDetector" type="Node2D"]
+script = ExtResource("1_yruvu")
+circle_color = Color(0.623529, 0.0941176, 0.360784, 0.611765)
+fov_color = Color(0.698039, 0.392157, 0.305882, 0.521569)
+fov_warn_color = Color(0.694118, 0.933333, 0.87451, 0.380392)
+fov_danger_color = Color(0.615686, 0.984314, 0.196078, 0.384314)
