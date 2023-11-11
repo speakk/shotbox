@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://fgdk2pmac5vt"]
 
-[ext_resource type="Theme" uid="uid://b64f3uxca5mhe" path="res://main_theme.tres" id="1_fuoeg"]
+[ext_resource type="Theme" uid="uid://cctaube7xhp23" path="res://main_theme.tres" id="1_fuoeg"]
 [ext_resource type="Script" path="res://ui/level_timer.gd" id="1_pel17"]
 
 [node name="LevelTimer" type="RichTextLabel"]
+visible = false
 offset_right = 704.0
 offset_bottom = 40.0
 theme = ExtResource("1_fuoeg")

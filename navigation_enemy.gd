@@ -1,6 +1,8 @@
 extends RigidBody2D
 
-const SPEED = 800
+@export var SPEED = 500
+@export var target_points: Array[Node2D] = []
+var current_target_point_index: int = 0
 
 var ENEMY_HIT_PARTICLES = preload("res://particles/enemy_hit.tscn")
 
@@ -20,31 +22,44 @@ func _ready():
 	$AnimationPlayer.play("RESET")
 	sleeping = true
 	$FOVDetector.has_noticed_target.connect(func(): set_player_noticed(true))
+	
+	if target_points.size() > 0:
+		final_target_position = target_points[0].global_position
 
 func _physics_process(delta):
 	target_position_check_timer -= delta
 	
-	if not _player_noticed:
-		return
-	
 	var player = get_tree().get_first_node_in_group("player")
-	if not player:
-		return
-	
-	if shooter._can_shoot:
+	if shooter._can_shoot and player and _player_noticed:
 		shooter.shoot(global_position, global_position.direction_to(player.global_position))
 		
 	if target_position_check_timer < 0:
-		final_target_position = player.global_position
+		if _player_noticed:
+			if not player:
+				return
+			final_target_position = player.global_position
 		
-		$NavigationAgent2D.target_position = final_target_position
+		if final_target_position:
+			$NavigationAgent2D.target_position = final_target_position
+			
 		target_position_check_timer = target_position_check_interval
 		
 		#await get_tree().physics_frame
 	
 	apply_central_force(global_position.direction_to($NavigationAgent2D.get_next_path_position()) * SPEED)
+	
+	if final_target_position and global_position.distance_to(final_target_position) < 60:
+		# TODO: Don't just use _player_noticed here, have proper state handling
+		# for when we're following the player etc
+		if not _player_noticed:
+			if target_points.size() > 0:
+				current_target_point_index += 1
+				current_target_point_index = wrapi(current_target_point_index, 0, target_points.size())
+				final_target_position = target_points[current_target_point_index].global_position
+				print("Now index: ", current_target_point_index)
 
 func get_hit(hit_position: Vector2, hit_velocity: Vector2, damage: int):
+	set_player_noticed(true)
 	var direction = hit_velocity.normalized()
 	var particles = ENEMY_HIT_PARTICLES.instantiate() as GPUParticles2D
 	particles.global_position = hit_position

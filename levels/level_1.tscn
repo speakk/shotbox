@@ -163,7 +163,14 @@ position = Vector2(971, 741)
 [node name="NavigationEnemy5" parent="." index="9" instance=ExtResource("6_c5twk")]
 position = Vector2(704, 848)
 
-[node name="NavigationEnemy6" parent="." index="10" instance=ExtResource("6_c5twk")]
+[node name="NavigationEnemy6" parent="." index="10" node_paths=PackedStringArray("target_points") instance=ExtResource("6_c5twk")]
 position = Vector2(704, 256)
+target_points = [NodePath("../target1"), NodePath("../target2")]
+
+[node name="target1" type="Node2D" parent="." index="11"]
+position = Vector2(704, 741)
+
+[node name="target2" type="Node2D" parent="." index="12"]
+position = Vector2(688, 304)
 
 [editable path="EndZone"]

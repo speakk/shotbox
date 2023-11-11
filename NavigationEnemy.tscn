@@ -133,8 +133,10 @@ polygon = PackedVector2Array(0, 6, -128, -320, 128, -320)
 
 [node name="Shooter" parent="." instance=ExtResource("4_angsu")]
 target_mask_layers = 12
+knockback = 40
 BULLET_DELAY = 0.5
 
 [node name="FOVDetector" parent="." instance=ExtResource("5_7n2rv")]
+view_detail = 100.0
 
 [connection signal="body_entered" from="DetectionArea2D" to="." method="_on_detection_area_2d_body_entered"]

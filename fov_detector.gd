@@ -55,7 +55,7 @@ func draw_circle_arc() -> void:
 		elif aux.level == 2 && show_target_line:
 			draw_line(get_position(), aux.pos, fov_danger_color, 20, true)
 		else:
-				draw_line(get_position(), aux.pos, fov_color, 10, true)
+				draw_line(get_position(), aux.pos, fov_color, 4, true)
 
 func deg_to_vector(deg: float) -> Vector2:
 	return Vector2(cos(deg_to_rad(deg)), sin(deg_to_rad(deg)))
