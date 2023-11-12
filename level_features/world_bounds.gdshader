@@ -25,13 +25,8 @@ void fragment() {
 	vec4 extra_texture_color = texture(extra_texture, UV * 0.6 - offset2 * 0.1 + offset * 0.1);
 	
 	COLOR = extra_texture_color * 0.35 + cool_fx * 0.3;
-	
-//	if (new_color.r > bias * abs(sin(TIME * 0.5)) * 0.5 + 0.25) {
-//		//COLOR = vec4(0.5);
-//		//COLOR = vec4(orig_color.r, orig_color.g, orig_color.b, 0.0);
-//		COLOR = mod_color2;
-//		COLOR.a = color;
-//	} else {
-//		COLOR = mod_color;
-//	}
+	COLOR.r *= 0.15;
+	COLOR.g *= 0.15;
+	COLOR.b *= 0.2;
+	COLOR.a = 1.0;
 }

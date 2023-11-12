@@ -16,6 +16,7 @@ var _dash_timer = 0
 
 func _ready():
 	$Health.zero_health.connect(_zero_health)
+	$AnimationPlayer.play("run")
 
 func _zero_health():
 	#queue_free()

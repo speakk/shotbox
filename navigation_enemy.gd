@@ -20,11 +20,15 @@ func _ready():
 	$Sprite2D.material = $Sprite2D.material.duplicate()
 	$Health.zero_health.connect(_zero_health)
 	$AnimationPlayer.play("RESET")
+	$AnimationPlayer2.play("run")
 	sleeping = true
 	$FOVDetector.has_noticed_target.connect(func(): set_player_noticed(true))
 	
 	if target_points.size() > 0:
 		final_target_position = target_points[0].global_position
+
+func _process(delta):
+	$Sprite2D.global_rotation = 0
 
 func _physics_process(delta):
 	target_position_check_timer -= delta
@@ -76,14 +80,14 @@ func _zero_health():
 func set_player_noticed(noticed):
 	if noticed:
 		_player_noticed = true
-		$PlayerNoticeRing.visible = true
+		#$PlayerNoticeRing.visible = true
 		$FOVDetector.visible = false
 		sleeping = false
 	
 	else:
 		_player_noticed = false
 		$Sprite2D.modulate = Color.WHITE
-		$PlayerNoticeRing.visible = false
+		#$PlayerNoticeRing.visible = false
 		$FOVDetector.visible = true
 		sleeping = true
 		

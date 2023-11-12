@@ -1,0 +1,67 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://bk5ypqnm07dac"]
+
+[sub_resource type="Shader" id="Shader_3hppv"]
+code = "shader_type canvas_item;
+
+uniform sampler2D texture2: repeat_enable;
+uniform sampler2D extra_texture;
+uniform vec4 mod_color: source_color;
+uniform vec4 mod_color2: source_color;
+uniform vec2 offset2 = vec2(0.0, 0.0);
+uniform float speed = 0.015;
+uniform float speed2 = 0.005;
+uniform float bias = 0.5;
+
+void fragment() {
+	float offset = texture(TEXTURE, UV - TIME * speed2).r * 0.1;
+//	float color = texture(TEXTURE, offset + UV + time).r;
+//	float color2 = texture(texture2, offset + UV - time).r;
+	float color = texture(TEXTURE, offset + UV + TIME * vec2(speed, speed)).r;
+	float color2 = texture(texture2, offset + UV - TIME * vec2(speed, speed)).r;
+	float energy = color * color2;
+	vec4 orig_color = vec4(COLOR);
+	
+	vec4 new_color = vec4(energy, energy, energy, 1);
+	
+	//vec4 cool_fx = vec4((new_color * mod_color + mod_color2).rgb, 0.2);
+	vec4 cool_fx = new_color * mod_color + mod_color2;
+	vec4 extra_texture_color = texture(extra_texture, UV * 0.6 - offset2 * 0.1 + offset * 0.1);
+	
+	COLOR = extra_texture_color * 0.35 + cool_fx * 0.3;
+	COLOR.r *= 0.25;
+	COLOR.g *= 0.25;
+	COLOR.b *= 0.4;
+	COLOR.a = 1.0;
+}
+"
+metadata/_edit_res_path = "res://level_features/world_bounds.tscn::Shader_3hppv"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xw7jj"]
+load_path = "res://.godot/imported/background1-720.jpg-8fb5d2c011a4ba0ec9eb851271f7d49f.ctex"
+
+[sub_resource type="Gradient" id="Gradient_n24kl"]
+offsets = PackedFloat32Array(0, 0.0988593, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.0304183, 0.0304183, 0.0304183, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_44oy7"]
+noise_type = 3
+seed = 2
+frequency = 0.002
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pos8x"]
+width = 1024
+height = 768
+seamless = true
+color_ramp = SubResource("Gradient_n24kl")
+noise = SubResource("FastNoiseLite_44oy7")
+
+[resource]
+shader = SubResource("Shader_3hppv")
+shader_parameter/mod_color = Color(0.156863, 0.172549, 0.352941, 1)
+shader_parameter/mod_color2 = Color(0.32549, 0.27451, 0.478431, 1)
+shader_parameter/offset2 = Vector2(0, 0)
+shader_parameter/speed = 0.02
+shader_parameter/speed2 = 0.01
+shader_parameter/bias = 0.5
+shader_parameter/texture2 = SubResource("NoiseTexture2D_pos8x")
+shader_parameter/extra_texture = SubResource("CompressedTexture2D_xw7jj")

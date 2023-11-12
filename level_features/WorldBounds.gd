@@ -19,6 +19,28 @@ func _ready():
 	_add_body(top, $ColorRect.position)
 	_add_body(bottom, Vector2($ColorRect.position.x, $ColorRect.position.y + $ColorRect.size.y))
 	
+	var occluderSize = 5
+
+	_add_occluder($ColorRect.position.x - occluderSize,
+		$ColorRect.position.y - occluderSize,
+		$ColorRect.position.x,
+		$ColorRect.position.y + $ColorRect.size.y + occluderSize)
+	
+	_add_occluder($ColorRect.position.x + $ColorRect.size.x,
+		$ColorRect.position.y - occluderSize,
+		$ColorRect.position.x + $ColorRect.size.x + occluderSize,
+		$ColorRect.position.y + $ColorRect.size.y + occluderSize)
+	
+	_add_occluder($ColorRect.position.x - occluderSize,
+		$ColorRect.position.y - occluderSize,
+		$ColorRect.position.x + $ColorRect.size.x + occluderSize,
+		$ColorRect.position.y)
+	
+	_add_occluder($ColorRect.position.x - occluderSize,
+		$ColorRect.position.y + $ColorRect.size.y,
+		$ColorRect.position.x + $ColorRect.size.x + occluderSize,
+		$ColorRect.position.y + $ColorRect.size.y + occluderSize)
+	
 	$ColorRect.z_index = -3
 	
 	$Background.show()
@@ -44,9 +66,22 @@ func _ready():
 	
 	Events.level_loaded.connect(_level_loaded)
 
+func _add_occluder(x1, y1, x2, y2):
+	var occluder = LightOccluder2D.new()
+	var occluderPolygon = OccluderPolygon2D.new()
+	occluderPolygon.polygon = PackedVector2Array([
+		Vector2(x1, y1),
+		Vector2(x2, y1),
+		Vector2(x2, y2),
+		Vector2(x1, y2),
+	])
+	occluder.occluder = occluderPolygon
+	add_child(occluder)
+
 func _level_loaded(level_id):
 	var index = Levels.get_level_index(level_id)
-	var background_no = fmod(index, ResourceCache.BACKGROUNDS.size())
+	#var background_no = fmod(index, ResourceCache.BACKGROUNDS.size())
+	var background_no = 2
 	%Background.material.set_shader_parameter("extra_texture", ResourceCache.BACKGROUNDS[background_no])
 
 func _process(delta):

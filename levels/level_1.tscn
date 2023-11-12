@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://caxum13s3imdw"]
+[gd_scene load_steps=17 format=3 uid="uid://caxum13s3imdw"]
 
 [ext_resource type="PackedScene" uid="uid://b3exqcsiecey8" path="res://levels/base_level.tscn" id="1_d0dop"]
 [ext_resource type="PackedScene" path="res://level_features/end_zone.tscn" id="2_0rfpp"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" path="res://level_features/player_marker.tscn" id="3_cnmb3"]
 [ext_resource type="PackedScene" uid="uid://odb66sy5mvpj" path="res://level_features/obstacle.tscn" id="4_g2syi"]
 [ext_resource type="PackedScene" uid="uid://btc4ohv77jipy" path="res://NavigationEnemy.tscn" id="6_c5twk"]
+[ext_resource type="PackedScene" uid="uid://d4vpfubu3yoi" path="res://level_features/illuminator.tscn" id="7_7umhy"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_lwrwp"]
 vertices = PackedVector2Array(1418, 390, 954, 390, 954, 10, 1526, 10, 1526, 566, 1418, 458, 886, 566, 886, 458, 938, 858, 938, 714, 1674, 714, 1622, 774, 1674, 10, 1782, 10, 1782, 314, 1834, 314, 1834, 10, 2262, 10, 2262, 374, 1782, 374, 1782, 918, 1674, 774, 1674, 918, 1622, 918, 778, 918, 886, 858, 778, 678, 726, 678, 726, 870, 298, 870, 298, 234, 726, 234, 726, 586, 778, 586, 778, 166, 886, 10, 298, 10, 298, 166)
@@ -59,12 +60,13 @@ bounce = 0.1
 z_as_relative = false
 
 [node name="WorldBounds" parent="." index="1" instance=ExtResource("2_hal4f")]
-position = Vector2(288, 0)
 
-[node name="ColorRect" type="ColorRect" parent="WorldBounds" index="0"]
-offset_right = 1984.0
+[node name="ColorRect" type="ColorRect" parent="WorldBounds" index="3"]
+offset_left = 288.0
+offset_top = 9.0
+offset_right = 2272.0
 offset_bottom = 928.0
-color = Color(0.188235, 0.513726, 1, 1)
+color = Color(0, 0, 0, 1)
 
 [node name="EndZone" parent="." index="2" instance=ExtResource("2_0rfpp")]
 position = Vector2(2080, 0)
@@ -148,29 +150,43 @@ physics_material_override = SubResource("PhysicsMaterial_n5w3q")
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="NavigationRegion2D/Obstacle10" index="0"]
 polygon = PackedVector2Array(1600, -128, 1600, 176, 1632, 176, 1632, -128)
 
-[node name="NavigationEnemy" parent="." index="5" instance=ExtResource("6_c5twk")]
-position = Vector2(992, 45)
+[node name="target3" type="Node2D" parent="." index="5"]
+position = Vector2(2208, 320)
 
-[node name="NavigationEnemy2" parent="." index="6" instance=ExtResource("6_c5twk")]
+[node name="target4" type="Node2D" parent="." index="6"]
+position = Vector2(1056, 48)
+
+[node name="NavigationEnemy" parent="." index="7" node_paths=PackedStringArray("target_points") instance=ExtResource("6_c5twk")]
+position = Vector2(992, 45)
+SPEED = 200
+target_points = [NodePath("../target3"), NodePath("../target4")]
+
+[node name="NavigationEnemy2" parent="." index="8" instance=ExtResource("6_c5twk")]
 position = Vector2(1872, 32)
 
-[node name="NavigationEnemy3" parent="." index="7" instance=ExtResource("6_c5twk")]
+[node name="NavigationEnemy3" parent="." index="9" instance=ExtResource("6_c5twk")]
 position = Vector2(1696, 48)
 
-[node name="NavigationEnemy4" parent="." index="8" instance=ExtResource("6_c5twk")]
+[node name="NavigationEnemy4" parent="." index="10" instance=ExtResource("6_c5twk")]
 position = Vector2(971, 741)
 
-[node name="NavigationEnemy5" parent="." index="9" instance=ExtResource("6_c5twk")]
+[node name="NavigationEnemy5" parent="." index="11" instance=ExtResource("6_c5twk")]
 position = Vector2(704, 848)
 
-[node name="NavigationEnemy6" parent="." index="10" node_paths=PackedStringArray("target_points") instance=ExtResource("6_c5twk")]
+[node name="NavigationEnemy6" parent="." index="12" node_paths=PackedStringArray("target_points") instance=ExtResource("6_c5twk")]
 position = Vector2(704, 256)
 target_points = [NodePath("../target1"), NodePath("../target2")]
 
-[node name="target1" type="Node2D" parent="." index="11"]
+[node name="target1" type="Node2D" parent="." index="13"]
 position = Vector2(704, 741)
 
-[node name="target2" type="Node2D" parent="." index="12"]
+[node name="target2" type="Node2D" parent="." index="14"]
 position = Vector2(688, 304)
+
+[node name="Illuminator" parent="." index="15" instance=ExtResource("7_7umhy")]
+position = Vector2(880, 15)
+
+[node name="Illuminator2" parent="." index="16" instance=ExtResource("7_7umhy")]
+position = Vector2(912, 544)
 
 [editable path="EndZone"]

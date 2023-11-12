@@ -17,7 +17,7 @@ extends Node2D
 @export var fov_warn_color: Color = Color("#b1eedf0b")
 @export var fov_danger_color: Color = Color("#9dfb320b")
 
-@export var enemy_groups: Array = ["player"]
+@export var enemy_groups: Array = ["player", "bullets"]
 
 var in_danger_area: Array = []
 var in_warn_area: Array = []
@@ -51,11 +51,11 @@ func draw_circle_arc() -> void:
 	
 	for aux in points_arc:
 		if aux.level == 1 && show_target_line:
-				draw_line(get_position(), aux.pos, fov_warn_color, 10, true)
+			draw_line(get_position(), aux.pos, fov_warn_color, 10, true)
 		elif aux.level == 2 && show_target_line:
 			draw_line(get_position(), aux.pos, fov_danger_color, 20, true)
 		else:
-				draw_line(get_position(), aux.pos, fov_color, 4, true)
+			draw_line(get_position(), aux.pos, fov_color, 4, true)
 
 func deg_to_vector(deg: float) -> Vector2:
 	return Vector2(cos(deg_to_rad(deg)), sin(deg_to_rad(deg)))

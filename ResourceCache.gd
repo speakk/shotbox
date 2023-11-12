@@ -5,7 +5,7 @@ const OUTSIDE_BACKGROUND = preload("res://in_game_outside_background_texture.tre
 const BACKGROUNDS = [
 	preload("res://assets/backgrounds/rock.jpg"),
 	preload("res://assets/backgrounds/background0.jpg"),
-	#preload("res://assets/backgrounds/background1-720.jpg"),
-	#preload("res://assets/backgrounds/background3-720.jpg"),
+	preload("res://assets/backgrounds/background1-720.jpg"),
+	preload("res://assets/backgrounds/background3-720.jpg"),
 	preload("res://assets/backgrounds/snow.jpg")
 ]

@@ -54,6 +54,7 @@ offset_right = 620.0
 offset_bottom = 720.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
