@@ -12,7 +12,7 @@ var next_position_target
 var final_target_position
 
 var target_position_check_interval = randf_range(1.5, 2.5)
-var target_position_check_timer = target_position_check_interval
+var target_position_check_timer = 0.1
 
 var _player_noticed = false
 

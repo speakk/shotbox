@@ -94,6 +94,21 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(1, 0.5)
 
+[sub_resource type="Animation" id="Animation_cvxms"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_f1lm3"]
 resource_name = "run"
 length = 0.8
@@ -111,21 +126,6 @@ tracks/0/keys = {
 "values": [0, 4, 8, 12]
 }
 
-[sub_resource type="Animation" id="Animation_cvxms"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3oxp3"]
 _data = {
 "RESET": SubResource("Animation_cvxms"),
@@ -134,11 +134,12 @@ _data = {
 
 [node name="NavigationEnemy" type="RigidBody2D"]
 collision_layer = 16
-collision_mask = 28
+collision_mask = 12
 max_contacts_reported = 2
 contact_monitor = true
 linear_damp = 1.0
 script = ExtResource("1_4nq04")
+SPEED = 350
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_xq5uc")
@@ -183,11 +184,16 @@ polygon = PackedVector2Array(0, 6, -128, -320, 128, -320)
 
 [node name="Shooter" parent="." instance=ExtResource("4_angsu")]
 target_mask_layers = 12
+damage = 50
 knockback = 40
-BULLET_DELAY = 0.5
+BULLET_DELAY = 1.0
 
 [node name="FOVDetector" parent="." instance=ExtResource("5_7n2rv")]
+radius_warn = 350.0
+field_of_view = 50.0
 view_detail = 100.0
+circle_color = Color(0.623529, 0.0941176, 0.360784, 0.356863)
+fov_color = Color(0.698039, 0.392157, 0.305882, 0.0588235)
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
 libraries = {

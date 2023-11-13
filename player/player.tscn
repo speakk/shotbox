@@ -120,6 +120,8 @@ color = Color(0.407843, 0.454902, 0.6, 1)
 
 [node name="Shooter" parent="." instance=ExtResource("4_jmgva")]
 target_mask_layers = 24
+damage = 30
+BULLET_DELAY = 1.0
 
 [node name="Health" parent="." instance=ExtResource("5_75jtr")]
 
@@ -131,7 +133,7 @@ texture = ExtResource("3_liloi")
 fixed_fps = 60
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.75, 0.75)
+zoom = Vector2(0.5, 0.5)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

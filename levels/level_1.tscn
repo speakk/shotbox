@@ -161,17 +161,20 @@ position = Vector2(992, 45)
 SPEED = 200
 target_points = [NodePath("../target3"), NodePath("../target4")]
 
-[node name="NavigationEnemy2" parent="." index="8" instance=ExtResource("6_c5twk")]
+[node name="NavigationEnemy2" parent="." index="8" node_paths=PackedStringArray("target_points") instance=ExtResource("6_c5twk")]
 position = Vector2(1872, 32)
+target_points = [NodePath("../target4"), NodePath("../target3")]
 
-[node name="NavigationEnemy3" parent="." index="9" instance=ExtResource("6_c5twk")]
+[node name="NavigationEnemy3" parent="." index="9" node_paths=PackedStringArray("target_points") instance=ExtResource("6_c5twk")]
 position = Vector2(1696, 48)
+target_points = [NodePath("../target1"), NodePath("../target3")]
 
 [node name="NavigationEnemy4" parent="." index="10" instance=ExtResource("6_c5twk")]
 position = Vector2(971, 741)
 
-[node name="NavigationEnemy5" parent="." index="11" instance=ExtResource("6_c5twk")]
+[node name="NavigationEnemy5" parent="." index="11" node_paths=PackedStringArray("target_points") instance=ExtResource("6_c5twk")]
 position = Vector2(704, 848)
+target_points = [NodePath("../target1"), NodePath("../target2")]
 
 [node name="NavigationEnemy6" parent="." index="12" node_paths=PackedStringArray("target_points") instance=ExtResource("6_c5twk")]
 position = Vector2(704, 256)
